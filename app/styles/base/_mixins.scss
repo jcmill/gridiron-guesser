@@ -3,3 +3,9 @@
   #{$settings}: "ital" $ital, "wght" $wght, "wdth" $wdth;
   line-height: $lh;
 }
+
+@mixin query($w) {
+  @media screen and (min-width: $w) {
+    @content
+  }
+}
