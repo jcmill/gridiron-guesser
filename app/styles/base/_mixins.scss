@@ -1,0 +1,5 @@
+@mixin font($fs: 16px, $wght: 500, $lh: 1, $wdth: 100, $ital: 0, $settings:font-variation-settings){
+  font: $fs "loew-variable", sans-serif;
+  #{$settings}: "ital" $ital, "wght" $wght, "wdth" $wdth;
+  line-height: $lh;
+}

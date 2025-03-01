@@ -1,9 +1,9 @@
 // base styles
-@use "base/global";
+@use "base/reset";
 @use "base/mixins";
 @use "base/placeholders";
-@use "base/reset";
 @use "base/variables";
+@use "base/global";
 
 // components styles
 @use "components/components";

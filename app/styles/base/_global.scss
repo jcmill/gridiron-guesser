@@ -1,0 +1,13 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@import url("https://use.typekit.net/qfy2sas.css");
+
+body {
+  background: $color-white;
+  @include font($fs-base);
+
+  h1 {
+    @include font($fs-h1, $fw-bolder);
+    text-transform: uppercase;
+  }
+}
