@@ -11,19 +11,19 @@ const options = {
     src: "*.html",
     dest: "*.html"
   },
-	pug: {
-		src: ["app/views/pages/*.pug", "app/views/blocks/**", "app/views/layouts/**"],
-		all: "app/views/**/*.pug",
-		dest: "./"
-	},
-	scripts: {
-		src: "app/scripts/**/*.js",
-		dest: "public/scripts"
-	},
-	styles: {
-		src: "app/styles/**/*.scss",
-		dest: "public/styles"
-	}
+  pug: {
+    src: "app/views/pages/index.pug",
+    all: "app/views/**/*.pug",
+    dest: "./"
+  },
+  scripts: {
+    src: "app/scripts/**/*.js",
+    dest: "public/scripts"
+  },
+  styles: {
+    src: "app/styles/**/*.scss",
+    dest: "public/styles"
+  }
 };
 
 async function styles() {
@@ -72,6 +72,7 @@ function views() {
     .pipe(pug({
         pretty: true
     }))
+    .pipe(rename('index.html'))
     .pipe(gulp.dest(options.pug.dest))
     .pipe(connect.reload())
   )
@@ -89,7 +90,7 @@ function watchTask(done) {
   gulp.watch(options.html.src, html);
   gulp.watch(options.styles.src, styles);
   gulp.watch(options.scripts.src, scripts);
-  gulp.watch(options.pug.src, views);
+  gulp.watch(options.pug.all, views); // Watch all Pug files
   done();
 }
 
