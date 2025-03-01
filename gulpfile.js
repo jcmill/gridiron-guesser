@@ -8,13 +8,13 @@ const uglify = require('gulp-uglify');
 
 const options = {
   html: {
-    src: "public/*.html",
-    dest: "public/*.html"
+    src: "*.html",
+    dest: "*.html"
   },
 	pug: {
 		src: ["app/views/pages/*.pug", "app/views/blocks/**", "app/views/layouts/**"],
 		all: "app/views/**/*.pug",
-		dest: "./public"
+		dest: "./"
 	},
 	scripts: {
 		src: "app/scripts/**/*.js",
@@ -67,7 +67,7 @@ function html() {
 
 function views() {
   return (
-    gulp.src(options.pug.all)
+    gulp.src(options.pug.src)
     .pipe(plumber())
     .pipe(pug({
         pretty: true
