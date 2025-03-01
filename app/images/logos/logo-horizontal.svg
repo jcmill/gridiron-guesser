@@ -42,7 +42,23 @@
     <use x="0" y="0" xlink:href="#logo"/>
   </g>
 
+  <g class="sprite" id="black" fill="#000000">
+    <use x="0" y="0" xlink:href="#logo"/>
+  </g>
+
   <g class="sprite" id="#ffffff" fill="#ffffff">
+    <use x="0" y="0" xlink:href="#logo"/>
+  </g>
+
+  <g class="sprite" id="white" fill="#ffffff">
+    <use x="0" y="0" xlink:href="#logo"/>
+  </g>
+
+  <g class="sprite" id="#F0F0F0" fill="#F0F0F0">
+    <use x="0" y="0" xlink:href="#logo"/>
+  </g>
+
+  <g class="sprite" id="light" fill="#F0F0F0">
     <use x="0" y="0" xlink:href="#logo"/>
   </g>
   
@@ -50,7 +66,15 @@
     <use x="0" y="0" xlink:href="#logo"/>
   </g>
   
+  <g class="sprite" id="green" fill="#F4C20E">
+    <use x="0" y="0" xlink:href="#logo"/>
+  </g>
+  
   <g class="sprite" id="#1561E8" fill="#1561E8">
+    <use x="0" y="0" xlink:href="#logo"/>
+  </g>
+  
+  <g class="sprite" id="blue" fill="#1561E8">
     <use x="0" y="0" xlink:href="#logo"/>
   </g>
 
