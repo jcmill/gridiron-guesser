@@ -1,0 +1,16 @@
+// base styles
+@use "base/global";
+@use "base/mixins";
+@use "base/placeholders";
+@use "base/reset";
+@use "base/variables";
+
+// components styles
+@use "components/components";
+
+// layouts styles
+@use "layouts/footer";
+@use "layouts/header";
+
+// pages styles
+@use "pages/index";

@@ -1,0 +1,29 @@
+{
+  "name": "pug-scss-starter",
+  "version": "1.0.0",
+  "description": "A quick and easy starter for building in Pug and SCSS",
+  "keywords": [
+    "Starter",
+    "Pug",
+    "SCSS"
+  ],
+  "license": "ISC",
+  "author": "jsmill",
+  "type": "commonjs",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.0",
+    "gulp-autoprefixer": "^9.0.0",
+    "gulp-connect": "^5.7.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pug": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^6.0.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.85.0"
+  }
+}
