@@ -1,13 +1,13 @@
 @use '../base/variables' as *;
 nav {
   .o-hamburger {
-    // align-items: center;
+    align-items: center;
     aspect-ratio: 6/5;
     cursor: pointer;
     display: grid;
     inset: 2em 2em auto auto;
     position: absolute;
-    transition: rotate .25s ease;
+    transition: all .25s ease;
     width: $hamburger;
     z-index: 1;
     
@@ -15,8 +15,8 @@ nav {
       background-color: $color-dark;
       height: $hamburger-lines;
       place-self: center center;
-      position: relative;
-      transition: width .25s ease;
+      position: absolute;
+      transition: all .25s ease;
       transform-origin: center;
       width: inherit;
     }
@@ -45,6 +45,39 @@ nav {
 
     &:hover .o-hamburger--line:last-of-type {
       width: 100%;
+    }
+  }
+  .nav-active {
+    .o-hamburger--line {
+      background-color: $color-dark;
+      height: $hamburger-lines;
+      opacity: 0;
+      place-self: center;
+      position: relative;
+      transition: all .25s ease;
+      transform-origin: center;
+      width: inherit;
+    }
+
+    .o-hamburger--line:first-of-type {
+      opacity: 1;
+      rotate: 225deg;
+      translate: 0 300%;
+    }
+
+    .o-hamburger--line:last-of-type {
+      opacity: 1;
+      rotate: -45deg;
+      translate: 0 -300%;
+    }
+
+    &:hover {
+      rotate: 0deg;
+      transition: rotate .25s ease;
+    }
+
+    &:hover .o-hamburger--line {
+      width: 100% !important;
     }
   }
 }
