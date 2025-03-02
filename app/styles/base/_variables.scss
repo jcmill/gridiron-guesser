@@ -2,7 +2,8 @@
 $color-white: #F0F0F0;
 $color-success: #F4C20E;
 $color-close: #1561E8;
-$color-black: #282828;
+$color-black: #000000;
+$color-dark: #282828;
 $color-input: #ffffff;
 
 // borders
@@ -31,3 +32,7 @@ $md: 768px;
 $lg: 992px;
 $xl: 1200px;
 $xxl: 1400px;
+
+// hamburger sizes
+$hamburger: 2em;
+$hamburger-lines: 3px; // calc($hamburger / 9)

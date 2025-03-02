@@ -1,0 +1,50 @@
+@use '../base/variables' as *;
+nav {
+  .o-hamburger {
+    // align-items: center;
+    aspect-ratio: 6/5;
+    cursor: pointer;
+    display: grid;
+    inset: 2em 2em auto auto;
+    position: absolute;
+    transition: rotate .25s ease;
+    width: $hamburger;
+    z-index: 1;
+    
+    &--line {
+      background-color: $color-dark;
+      height: $hamburger-lines;
+      place-self: center center;
+      position: relative;
+      transition: width .25s ease;
+      transform-origin: center;
+      width: inherit;
+    }
+
+    &--line:first-of-type {
+      place-self: start center;
+    }
+
+    &--line:last-of-type {
+      place-self: end center;
+    }
+
+    &:hover {
+      rotate: -90deg;
+      transition: rotate .25s ease;
+    }
+
+    &:hover .o-hamburger--line {
+      transition: width .25s ease;
+      width: 50%;
+    }
+
+    &:hover .o-hamburger--line:first-of-type {
+      width: 25%;
+    }
+
+    &:hover .o-hamburger--line:last-of-type {
+      width: 100%;
+    }
+  }
+}

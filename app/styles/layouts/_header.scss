@@ -1,0 +1,16 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+
+header {
+  display: grid;
+  justify-content: start;
+  padding: 1em;
+
+  img {
+    width: clamp(9em, 14dvw, 13em);
+  }
+
+  @include query($md) {
+    justify-content: center;
+  }
+}
