@@ -31,11 +31,11 @@ nav {
 
     &:hover {
       rotate: -90deg;
-      transition: rotate .25s ease;
+      transition: all .25s ease;
     }
 
     &:hover .o-hamburger--line {
-      transition: width .25s ease;
+      transition: all .25s ease;
       width: 50%;
     }
 
@@ -56,7 +56,7 @@ nav {
       position: relative;
       transition: all .25s ease;
       transform-origin: center;
-      width: inherit;
+      width: $hamburger;
     }
 
     .o-hamburger--line:first-of-type {
@@ -67,17 +67,26 @@ nav {
 
     .o-hamburger--line:last-of-type {
       opacity: 1;
-      rotate: -45deg;
+      rotate: -225deg;
       translate: 0 -300%;
     }
 
     &:hover {
       rotate: 0deg;
-      transition: rotate .25s ease;
+      transition: all .25s ease;
+      width: $hamburger;
     }
 
     &:hover .o-hamburger--line {
-      width: 100% !important;
+      width: $hamburger !important;
+    }
+
+    &:hover .o-hamburger--line:first-of-type {
+      width: $hamburger !important;
+    }
+
+    &:hover .o-hamburger--line:last-of-type {
+      width: $hamburger !important;
     }
   }
 }
