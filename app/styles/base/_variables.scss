@@ -1,13 +1,43 @@
+@use 'sass:map';
+// @use 'scss-color-curve' as *;
 // colors
-$color-white: #F0F0F0;
-$color-success: #F4C20E;
-$color-close: #1561E8;
-$color-black: #000000;
-$color-dark: #282828;
-$color-input: #ffffff;
+$white: #ffffff;
+$black: #000000;
 
-// borders
-$border-standard: 1px solid $color-black;
+$color-settings: (
+  'colors': (
+    'a': (
+      0: #DADEDF,
+      name: 'light',
+      gradientScale: 3
+    ),
+    'b': (
+      0: #58F204,
+      name: 'success',
+      gradientScale: 3
+    ),
+    'c': (
+      0: #9ED6FF,
+      name: 'close',
+      gradientScale: 3
+    ),
+    'd': (
+      0: #233993,
+      name: 'blue',
+      gradientScale: 3
+    ),
+    'e': (
+      0: #1F305B,
+      name: 'dark blue',
+      gradientScale: 3
+    ),
+    'f': (
+      0: #282828,
+      name: 'dark',
+      gradientScale: 3
+    )
+  )
+);
 
 // fonts
 $fs-base: 16px;

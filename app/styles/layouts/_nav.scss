@@ -1,5 +1,7 @@
 @use '../base/variables' as *;
-nav {  
+@use '../base/scss-color-curve' as *;
+
+nav {
   .o-hamburger {
     align-items: center;
     aspect-ratio: 6/5;
@@ -13,7 +15,7 @@ nav {
     z-index: 1;
     
     &--line {
-      background-color: $color-dark;
+      background-color: $black;
       height: $hamburger-lines;
       place-self: center center;
       position: absolute;
@@ -50,7 +52,7 @@ nav {
   }
   .nav-active {
     .o-hamburger--line {
-      background-color: $color-dark;
+      background-color: $black;
       height: $hamburger-lines;
       opacity: 0;
       place-self: center;
@@ -92,7 +94,7 @@ nav {
   }
 
   .c-menu {
-    background: red;
+    background: color(e);
     display: flex;
     flex-direction: column;
     height: 100dvh;

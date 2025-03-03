@@ -1,0 +1,147 @@
+@use 'sass:color';
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
+@use 'variables' as *;
+@forward 'variables';
+
+@function stripUnit($value) {
+  // if value has a unit, strip it
+  @if math.is-unitless($value) == false {
+    @return math.div($value, ($value * 0 + 1)); // math that changes a value in the divisor to a unitless 1 and divides the dividend vaule.
+  } @else if (math.is-unitless($value) == true) {
+    // else return value
+    @return $value;
+  }
+};
+
+@function color($color, $scale: 0, $linear: false, $gradientScale: 3, $namespace: $color-settings) {
+
+  // get the base color through map. default to $color-settings with the option to namespace a seperate map or use a hex code for the color straight up.
+  $baseColor: if(map.has-key($namespace, colors, $color, 0), 
+                map.get($namespace, colors, $color, 0), 
+                  if(map.has-key($namespace, $color), 
+                    map.get($namespace, $color, $scale), 
+                    $color));
+
+  // grab the base color saturattion and luminance as starting point for building other colors
+   $baseSaturation:  color.channel($baseColor, "saturation", $space: hsl);
+  //  $baseSaturation: saturation($baseColor);
+   $baseLuminance: color.channel($baseColor, "lightness", $space: hsl);
+  //  $baseLuminance: lightness($baseColor);
+ 
+   $difference: 1%; // initiate variable
+   
+   // if the color is grey/saturation is at 0%, only use the linear approach
+   @if ($baseSaturation == 0%) {
+    $linear: true;
+  } 
+                  
+  @if ($linear == false) {
+                    
+    // get scale through map
+    $gradientScale: if(map.has-key($color-settings, $color, gradientScale), 
+                    map.get($color-settings, $color, gradientScale), 
+                    $gradientScale);
+  
+    // if any of the color maps have keys with numbers, that indicates a custom color scheme. this pulls the key value pair and returns the color for the scale value.
+    $customColors: map.get($color-settings, colors, $color);
+
+    // if there are custom colors in a map, this will take the number of keys in a map, initiate a negative amount equal to the number of key to start cycling through eack key. this ensures it will grab negative keys values as well.
+    $k: -1 * list.length($customColors);
+    @while $k < list.length($customColors){
+      @if ($k == $scale and map.has-key($color-settings, colors, $color, $k)) {
+        $customColors: map.get($color-settings, colors, $color, $k);
+        @return $customColors;
+      }
+      $k: $k + 1;    
+    }
+
+    // takes the difference between the greater value and 100 or the differrence from the smallest value and 0.
+    @if ($scale == 0 or $scale == '') {
+
+      // if the scale is blank of has a 0, use the baseColor
+      @return $baseColor;
+
+    } @else if (($baseSaturation >= $baseLuminance and ($baseSaturation > 50 and $baseSaturation < 100))) {
+
+      // difference between the colors saturation and 100
+      $difference: 100% - $baseSaturation;
+
+    } @else if (($baseLuminance >= $baseSaturation and ($baseLuminance > 50 and $baseLuminance < 100))) {
+
+      // difference between the colors luminance and 100
+      $difference: 100% - $baseLuminance;
+
+    } 
+    @else if (($baseSaturation <= $baseLuminance and ($baseSaturation < 50 and $baseSaturation > 0))) {
+
+      // difference between 0 and the colors saturation
+      $difference: $baseSaturation;
+
+    } @else if (($baseLuminance <= $baseSaturation and ($baseLuminance < 50 and $baseLuminance > 0))) {
+
+      // difference between 0 and the colors luminance
+      $difference: $baseLuminance;
+    }
+
+    // while the condition of $scale is a positive number
+    @if ($scale > 0) {
+
+      // creates an adjustable value for the asymptote growth/decay equation. taking the scale key value and dividing it by the difference from the colors saturation/luminance position. meant for finer and individual adjustments governed from within the map
+      $adjustedScale: math.div(stripUnit($difference), math.div($gradientScale, 2));
+
+      // sum of consecutive integers based on the condition of $scale used to change the base color. basically a whole number version fo the @while below "n + (n/2)(1 + n)". changing 2 to 3 and 1 to 5 below, allows for a more gradual growth between steps
+      $newSaturation: math.percentage(calc((abs($scale) + math.div(abs($scale), 2) * (1 + abs($scale))) / 100)
+      );
+
+      // asymptote growth/decay equation y = 2/x
+      $newLuminance: calc($difference * (2 / abs($adjustedScale)));
+
+      // sum of consecutive non-integers and adjusted with the scale and adjustedscale
+      $i: 1;
+      @while $i < $scale {
+        $newLuminance: $newLuminance + $i + math.div($scale, 10) + calc($difference * (2 / abs($adjustedScale)));
+        $i: $i + 1;
+      }
+
+      // returns each newly built color requested
+      @return color.adjust($baseColor, $saturation: $newSaturation, $lightness: $newLuminance);
+      
+      // when the condition of scale is a negative number
+    } @else if ($scale < 0) {
+
+      // creates an adjustable value for the asymptote growth/decay equation. taking the scale key value and dividing it by the difference from the colors saturation/luminance position. meant for finer and individual adjustments governed from within the map
+      $adjustedScale: math.div(stripUnit($difference), math.div($gradientScale, 2));
+
+      // sum of consecutive integers based on the condition of $scale used to change the base color. basically a whole number version fo the @while below "n + (n/2)(1 + n)". changing 2 to 1.5 and 1 to 5 below, allows for shift in the curve
+      $newSaturation: math.percentage(calc((math.div(abs($scale), 2) * (1 + abs($scale))) / 100));
+
+      // asymptote growth/decay equation adjusted for closer initial jump from baseColor
+      $newLuminance: 1 + calc((math.div($difference, 5) * (1 / abs($adjustedScale))));
+
+      // sum of consecutive non-integers and adjusted with the scale and adjustedscale but from the negative direction
+      $i: 0;
+      @while $i > $scale {
+        $newLuminance: math.div($newLuminance, 1) - $i - math.div($scale, 10) + calc($difference * (1 / abs($adjustedScale)));
+        $i: $i - 1;
+      }
+      
+      // converts value to a negative number to decrease luminance
+      $newLuminance: - $newLuminance;
+
+      // returns each newly built color requested
+      @return color.adjust($baseColor, $saturation: $newSaturation, $lightness: $newLuminance);
+    }
+  } @else if ($linear == true) {
+    @if ($scale == 0) {
+      @return $baseColor;
+    } @else if ($scale > 0) {
+      $lightenAmount: $scale * 5%;
+      @return color.adjust($baseColor, $lightness: $lightenAmount);
+    } @else if ($scale < 0) {
+      $darkenAmount: $scale * 5%;
+      @return color.adjust($baseColor, $lightness: $darkenAmount);
+    }
+  }
+}
