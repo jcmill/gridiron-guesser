@@ -1,112 +1,132 @@
 @use '../base/variables' as *;
 @use '../base/scss-color-curve' as *;
 
-nav {
-  .o-hamburger {
-    align-items: center;
-    aspect-ratio: 6/5;
-    background-color: unset;
-    cursor: pointer;
-    display: grid;
-    inset: 2em 2em auto auto;
+.o-hamburger {
+  align-items: center;
+  aspect-ratio: 6/5;
+  background-color: unset;
+  cursor: pointer;
+  display: grid;
+  inset: 2em 2em auto auto;
+  position: absolute;
+  transition: all .25s ease;
+  width: $hamburger;
+  z-index: 2;
+  
+  &--line {
+    background-color: color(a);
+    height: $hamburger-lines;
+    place-self: center center;
     position: absolute;
+    transition: all .25s ease;
+    transform-origin: center;
+    width: inherit;
+  }
+
+  &--line:first-of-type {
+    place-self: start center;
+  }
+
+  &--line:last-of-type {
+    place-self: end center;
+  }
+
+  &:hover {
+    rotate: -90deg;
+    transition: all .25s ease;
+  }
+
+  &:hover .o-hamburger--line {
+    transition: all .25s ease;
+    width: 50%;
+  }
+
+  &:hover .o-hamburger--line:first-of-type {
+    width: 25%;
+  }
+
+  &:hover .o-hamburger--line:last-of-type {
+    width: 100%;
+  }
+}
+
+.nav-active {
+  .o-hamburger--line {
+    background-color: color(a);
+    height: $hamburger-lines;
+    opacity: 0;
+    place-self: center;
+    position: relative;
+    transition: all .25s ease;
+    transform-origin: center;
+    width: $hamburger;
+  }
+
+  .o-hamburger--line:first-of-type {
+    opacity: 1;
+    rotate: 225deg;
+    translate: 0 300%;
+  }
+
+  .o-hamburger--line:last-of-type {
+    opacity: 1;
+    rotate: -225deg;
+    translate: 0 -300%;
+  }
+
+  &:hover {
+    rotate: 0deg;
     transition: all .25s ease;
     width: $hamburger;
-    z-index: 1;
-    
-    &--line {
-      background-color: $black;
-      height: $hamburger-lines;
-      place-self: center center;
-      position: absolute;
-      transition: all .25s ease;
-      transform-origin: center;
-      width: inherit;
-    }
-
-    &--line:first-of-type {
-      place-self: start center;
-    }
-
-    &--line:last-of-type {
-      place-self: end center;
-    }
-
-    &:hover {
-      rotate: -90deg;
-      transition: all .25s ease;
-    }
-
-    &:hover .o-hamburger--line {
-      transition: all .25s ease;
-      width: 50%;
-    }
-
-    &:hover .o-hamburger--line:first-of-type {
-      width: 25%;
-    }
-
-    &:hover .o-hamburger--line:last-of-type {
-      width: 100%;
-    }
-  }
-  .nav-active {
-    .o-hamburger--line {
-      background-color: $black;
-      height: $hamburger-lines;
-      opacity: 0;
-      place-self: center;
-      position: relative;
-      transition: all .25s ease;
-      transform-origin: center;
-      width: $hamburger;
-    }
-
-    .o-hamburger--line:first-of-type {
-      opacity: 1;
-      rotate: 225deg;
-      translate: 0 300%;
-    }
-
-    .o-hamburger--line:last-of-type {
-      opacity: 1;
-      rotate: -225deg;
-      translate: 0 -300%;
-    }
-
-    &:hover {
-      rotate: 0deg;
-      transition: all .25s ease;
-      width: $hamburger;
-    }
-
-    &:hover .o-hamburger--line {
-      width: $hamburger !important;
-    }
-
-    &:hover .o-hamburger--line:first-of-type {
-      width: $hamburger !important;
-    }
-
-    &:hover .o-hamburger--line:last-of-type {
-      width: $hamburger !important;
-    }
   }
 
-  .c-menu {
-    background: color(e);
+  &:hover .o-hamburger--line {
+    width: $hamburger !important;
+  }
+
+  &:hover .o-hamburger--line:first-of-type {
+    width: $hamburger !important;
+  }
+
+  &:hover .o-hamburger--line:last-of-type {
+    width: $hamburger !important;
+  }
+}
+
+.c-menu {
+
+  &__content {
+    background: color(d, -3);
+    box-shadow: -5px 0 40px 0px color(d, -6);
     display: flex;
-    flex-direction: column;
     height: 100dvh;
-    inset: auto 0 0 auto;
+    inset: 0 0 auto auto;
+    opacity: 0;
+    place-self: center end;
     position: absolute;
-    translate: 40dvw 0;
-    transition: all .25s ease;
+    translate: 40dvw;
+    transition: translate .25s ease, opacity .25s .25s ease;
     width: 40dvw;
+    z-index: 1;
 
     &--open {
-      translate: 0;
-      transition: all .25s ease;
+      opacity: 1;
+      translate: 0dvw;
+      transition: translate .25s ease, opacity 0s 0s ease;
     }
+  }
+
+  &--noblur, &--blur {
+    inset: 0 0 0 0;
+    position: absolute;
+    transition: all .25s .15s ease;
+  }
+
+  &--noblur{
+    backdrop-filter: blur(0px);
+  }
+
+  &--blur{
+    backdrop-filter: blur(10px);
   }
 }

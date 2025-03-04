@@ -1,11 +1,72 @@
 @use 'variables' as *;
 @use 'mixins' as *;
+@use 'scss-color-curve' as *;
 @import url("https://use.typekit.net/qfy2sas.css");
 
 body {
-  background: $white;
+  background: 
+    radial-gradient(
+      farthest-side at -10% -10%,
+      color(d, -4) 10%,
+      transparent 80%
+    ),
+    radial-gradient(
+      farthest-side at 20% 10%,
+      color(d) 10%,
+      transparent 100%
+    ),
+    radial-gradient(
+      farthest-side at -20% 95%,
+      color(a),
+      transparent 40%
+    ),
+    radial-gradient(
+      farthest-side at 0% 150%,
+      color(a),
+      transparent 50%
+    ),
+    radial-gradient(
+      farthest-side at 10% 75%,
+      color(d),
+      transparent 70%
+    ),
+    radial-gradient(
+      farthest-side at 70% 20%,
+      color(d, -3) 70%,
+      transparent 100%
+    ),
+    radial-gradient(
+      farthest-side at 80% 60%,
+      color(d, 2) 20%,
+      color(a)
+    );
+  // background: url('../images/grain-bg.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
   overflow-x: clip; 
   @include font($fs-base);
+
+  &::before {
+    background: linear-gradient(
+      to bottom right,
+      color(e),
+      rgba(0, 0, 0, 0) 90%),
+      url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='150' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-blend-mode: hard-light;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: .5;
+    content: '';
+    inset: 0 0 0 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .hide {
+    display: none;
+  }
 
   h1 {
     @include font($fs-h1, $fw-bolder);

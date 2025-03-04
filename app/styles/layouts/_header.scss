@@ -2,10 +2,16 @@
 @use '../base/mixins' as *;
 
 header {
+  align-items: center;
   display: grid;
+  grid-template: 1fr / 1fr;
   justify-content: start;
+  overflow: clip;
 
   img {
+    grid-row: 1;
+    margin: 1em 0 3em 0;
+    place-self: center;
     width: clamp(9em, 14dvw, 13em);
   }
 

@@ -3,7 +3,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'variables' as *;
-@forward 'variables';
 
 @function stripUnit($value) {
   // if value has a unit, strip it
