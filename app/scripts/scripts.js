@@ -1,3 +1,4 @@
+const bodyContainer = document.querySelector('body');
 const nav = document.querySelector('nav');
 const btnHamburger = document.querySelector('.js-hamburger');
 const menu = document.querySelector('.js-menu__content');
@@ -21,11 +22,13 @@ function menuDisplay(action){
     menu.classList.remove('hide');
     menuBlur.classList.remove('hide');
     setTimeout(() => {
+      bodyContainer.classList.add('fixed');
       btnHamburger.classList.add('nav-active');
       menu.classList.add('c-menu__content--open');
       menuBlur.classList.add('c-menu--blur');
     }, 0);
   } else if (action === 'remove') {
+    bodyContainer.classList.remove('fixed');
     btnHamburger.classList.remove('nav-active');
     menu.classList.remove('c-menu__content--open');
     menuBlur.classList.remove('c-menu--blur');
