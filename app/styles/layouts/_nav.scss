@@ -1,5 +1,6 @@
 @use '../base/variables' as *;
 @use '../base/scss-color-curve' as *;
+@use '../base/mixins' as *;
 
 .o-hamburger {
   align-items: center;
@@ -94,7 +95,6 @@
 }
 
 .c-menu {
-
   &__content {
     background: color(d, -3);
     box-shadow: -5px 0 40px 0px color(d, -6);
@@ -104,10 +104,15 @@
     opacity: 0;
     place-self: center end;
     position: absolute;
-    translate: 40dvw;
+    translate: 90dvw;
     transition: translate .25s ease, opacity .25s .25s ease;
-    width: 40dvw;
+    width: 90dvw;
     z-index: 1;
+    
+    @include query($md) {
+      translate: 40dvw;
+      width: 40dvw;
+    }
 
     &--open {
       opacity: 1;

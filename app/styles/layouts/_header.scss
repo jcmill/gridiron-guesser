@@ -10,12 +10,13 @@ header {
 
   img {
     grid-row: 1;
-    margin: 1em 0 3em 0;
-    place-self: center;
+    margin: 1em 0 3em 1em;
+    place-self: start;
     width: clamp(9em, 14dvw, 13em);
   }
 
   @include query($md) {
-    justify-content: center;
+    place-self: center;
+    margin: 1em 0 3em 0;
   }
 }
