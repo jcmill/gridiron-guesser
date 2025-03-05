@@ -24,6 +24,7 @@
   .c-search {
     grid-column: 1 / span 2;
     grid-row: 1;
+    isolation: isolate;
     position: relative;
 
     @include query($md) {
@@ -33,24 +34,15 @@
     &__input {
       display: flex;
       flex-direction: row;
-    }
-
-    button {
-      background: color(b);
-      cursor: pointer;
-      transition: all .25s ease;
-
-      &:hover {
-        background: color(d, -4);
-        transition: all .25s ease;
-      }
+      position: relative;
+      z-index: 1;
     }
 
     &__results {
       background: rgba($color: color(d, -3), $alpha: .65);
       backdrop-filter: blur(10px);
       position: absolute;
-      translate: 0 2.5em;
+      translate: 0 calc($input-size * -1);
       width: 100%;
 
       @include query($md) {
@@ -58,7 +50,9 @@
       }
 
       &--key {
-        padding: 1em;
+        padding: calc($input-size / 3.5) 0;
+        position: relative;
+        z-index: -1;
         @include font(14px, 300);
 
         @include query($lg){
@@ -68,10 +62,8 @@
       
       &--options {
         background: linear-gradient(rgba($color: color(d, -2), $alpha: 1.0), rgba($color: color(d, -2), $alpha: .5));
-        // padding: .5em 1em;
 
         li {
-          width: 100%;
           @include font(14px, 950);
 
           @include query($lg){
@@ -82,20 +74,18 @@
 
       ul {
         display: flex;
-        padding-inline-start: 0;
+        margin: .5em 0 0 0;
+        padding: 0 .5em;
 
         li {
-          flex: 1 0 auto;
-          position: relative;
+          border-right: 1px solid color(a);
+          flex: 0 1 auto;
+          text-align: center;
           text-transform: uppercase;
+          width: 100%;
 
-          &::before {
-            background: color(a);
-            bottom: -5px;
-            content: '';
-            height: 1px;
-            position: absolute;
-            width: 50%;
+          &:last-of-type {
+            border: none;
           }
         }
       }
@@ -103,8 +93,12 @@
       .o-player {
         padding: 1em 0;
 
-        &:hover {
+        &:hover, &:focus {
           background: color(d);
+        }
+
+        h4 {
+          padding: 0 .5em;
         }
       }
     }
