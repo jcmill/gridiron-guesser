@@ -139,10 +139,16 @@ function clearResults() {
   searchResultsOptions.innerHTML = '';
 }
 
-document.addEventListener('click', function(){
-  if(inputSearch === document.activeElement) {
+inputSearch.addEventListener('focus', function(){
+  if (document.activeElement === inputSearch) {
+    console.log('Input is focused');
     searchResults.classList.add('a-search-key--slide');
-  } else if (inputSearch !== document.activeElement) {
+  }
+});
+
+inputSearch.addEventListener('blur', function(){
+  if (document.activeElement !== inputSearch && inputSearch.value == 0) {
+    console.log('Input is not focused');
     searchResults.classList.remove('a-search-key--slide');
   }
-})
+});
