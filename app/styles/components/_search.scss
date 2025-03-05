@@ -1,0 +1,116 @@
+@use '../base/variables' as *;
+@use '../base/mixins' as *;
+@use '../base/scss-color-curve' as *;
+
+.o-ui {
+  display: grid;
+  grid-template: 1fr 1fr / 1fr 1fr;
+
+  @include query($md) {
+    grid-template: 1fr / 1fr 3fr 1fr;
+  }
+
+  input {
+    border: none;
+    height: $input-size;
+    padding-left: .5em;
+    width: 100%;
+  }
+
+  .c-penalties {
+    place-self: center;
+  }
+
+  .c-search {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    position: relative;
+
+    @include query($md) {
+      grid-column: 2;
+    }
+
+    &__input {
+      display: flex;
+      flex-direction: row;
+    }
+
+    button {
+      background: color(b);
+      cursor: pointer;
+      transition: all .25s ease;
+
+      &:hover {
+        background: color(d, -4);
+        transition: all .25s ease;
+      }
+    }
+
+    &__results {
+      background: rgba($color: color(d, -3), $alpha: .65);
+      backdrop-filter: blur(10px);
+      position: absolute;
+      translate: 0 2.5em;
+      width: 100%;
+
+      @include query($md) {
+        translate: 0;
+      }
+
+      &--key {
+        padding: 1em;
+        @include font(14px, 300);
+
+        @include query($lg){
+          @include font($fs-body, 300);
+        }
+      }
+      
+      &--options {
+        background: linear-gradient(rgba($color: color(d, -2), $alpha: 1.0), rgba($color: color(d, -2), $alpha: .5));
+        // padding: .5em 1em;
+
+        li {
+          width: 100%;
+          @include font(14px, 950);
+
+          @include query($lg){
+            @include font($fs-body, 950);
+          }
+        }
+      }
+
+      ul {
+        display: flex;
+        padding-inline-start: 0;
+
+        li {
+          flex: 1 0 auto;
+          position: relative;
+          text-transform: uppercase;
+
+          &::before {
+            background: color(a);
+            bottom: -5px;
+            content: '';
+            height: 1px;
+            position: absolute;
+            width: 50%;
+          }
+        }
+      }
+      
+      .o-player {
+        padding: 1em 0;
+
+        &:hover {
+          background: color(d);
+        }
+      }
+    }
+  }
+
+  .c-playclock {
+    place-self: center;
+  }
+}

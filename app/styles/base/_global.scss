@@ -44,6 +44,7 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
+  color: $white;
   max-height: 100vh;
   overflow-x: clip; 
   @include font($fs-base);
@@ -71,9 +72,50 @@ body {
     @include font($fs-h1, $fw-bolder);
     text-transform: uppercase;
   }
+  
+  h2 {
+    @include font($fs-h2, $fw-bolder);
+    text-transform: uppercase;
+  }
+
+  h3 {
+    @include font($fs-h3, $fw-bolder);
+    text-transform: uppercase;
+  }
+
+  h4 {
+    @include font($fs-h4, $fw-bolder);
+    text-transform: uppercase;
+  }
+
+  h5 {
+    @include font($fs-h5, $fw-bolder);
+    text-transform: uppercase;
+
+    @include query($md) {
+      @include font(1.95vw, $fw-bolder, 1, 50);
+    }
+  }
+
+  h6 {
+    @include font($fs-h6, $fw-bolder, 1, 50);
+    text-transform: uppercase;
+  }
+  
 
   section {
-    min-height: 100dvh;
+    padding: 0 4dvw;
+
+    @include query($lg) {
+      padding: 0 10dvw;
+    }
+  }
+
+  .success {
+    color: color(b);
+  }
+  .close {
+    color: color(c);
   }
 }
 

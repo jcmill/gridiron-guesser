@@ -1,0 +1,34 @@
+@use '../base/variables' as *;
+@use '../base/scss-color-curve' as *;
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-icon {
+  aspect-ratio: 1;
+  position: relative;
+  width: $input-size;
+
+  &::before {
+    aspect-ratio: 1;
+    content: '';
+    display: block;
+    mask: no-repeat center / contain;
+    position: absolute;
+    top: 0;
+    width: $input-size;
+  }
+
+  &--search {
+    &::before {
+      background-color: color(d);
+      mask-image: $icon-search;
+
+    }
+    &:hover::before {
+      background-color: color(a);
+      transition: all .25s ease;
+    }
+  }
+}
