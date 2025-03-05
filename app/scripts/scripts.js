@@ -5,7 +5,8 @@ const menu = document.querySelector('.js-menu__content');
 const menuBlur = document.querySelector('.js-menu--blur');
 
 const inputSearch = document.querySelector('.input-search');
-const searchResults = document.querySelector('.js-search-options');
+const searchResults = document.querySelector('.js-search-results');
+const searchResultsOptions = document.querySelector('.js-search-options');
 
 document.addEventListener('click', function(el){
   if (!btnHamburger.contains(el.target) && el.target === menuBlur) {
@@ -126,7 +127,7 @@ function displaySearchResults(result) {
 
     return SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerSchool);
   });
-  searchResults.innerHTML = content.join('');
+  searchResultsOptions.innerHTML = content.join('');
 };
 
 function selectInput(playerInfo) {
@@ -135,11 +136,13 @@ function selectInput(playerInfo) {
 }
 
 function clearResults() {
-  searchResults.innerHTML = '';
+  searchResultsOptions.innerHTML = '';
 }
 
 document.addEventListener('click', function(){
   if(inputSearch === document.activeElement) {
-    console.log('focused');
+    searchResults.classList.add('a-search-key--slide');
+  } else if (inputSearch !== document.activeElement) {
+    searchResults.classList.remove('a-search-key--slide');
   }
 })

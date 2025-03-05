@@ -42,6 +42,7 @@
       background: rgba($color: color(d, -3), $alpha: .65);
       backdrop-filter: blur(10px);
       position: absolute;
+      transition: all .25s ease;
       translate: 0 calc($input-size * -1);
       width: 100%;
 
@@ -101,6 +102,11 @@
           padding: 0 .5em;
         }
       }
+    }
+
+    .a-search-key--slide {
+      transition: all .25s ease;
+      translate: 0;
     }
   }
 
