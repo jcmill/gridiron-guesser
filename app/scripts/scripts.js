@@ -43,30 +43,52 @@ function menuDisplay(action){
   }
 };
 
-let players = [
-  {
-    "longName": "Jake Miller",
-    "con": "AE",
-    "team": "ARI",
-    "pos": "LS",
-    "jerseyNum": "59",
-    "weight": "234",
-    "height": "6'4\"",
-    "exp": "2",
-    "school": "Notre Dame"
-  },
-  {
-    "longName": "Johanna Miller",
-    "con": "NW",
-    "team": "KC",
-    "pos": "RB",
-    "jerseyNum": "11",
-    "weight": "120",
-    "height": "5'6\"",
-    "exp": "3",
-    "school": "Fresno State"
-    },
-];
+let players = [];
+
+fetch('public/scripts/players.json')
+  .then(response => response.json())
+  .then(data => {
+    playersData = data;
+    players = playersData.body
+  })
+  .catch(error => console.error('Error fetching player data:', error));
+
+
+// let players = [
+//   {
+//     "longName": "Jake Miller",
+//     "con": "AE",
+//     "team": "ARI",
+//     "pos": "LS",
+//     "jerseyNum": "59",
+//     "weight": "234",
+//     "height": "6'4\"",
+//     "exp": "2",
+//     "school": "Notre Dame"
+//   },
+//   {
+//     "longName": "Johanna Miller",
+//     "con": "NW",
+//     "team": "KC",
+//     "pos": "RB",
+//     "jerseyNum": "11",
+//     "weight": "120",
+//     "height": "5'6\"",
+//     "exp": "3",
+//     "school": "Fresno State"
+//     },
+//     {
+//       "longName": "Trevor Vernon-Yates",
+//       "con": "NE",
+//       "team": "DE",
+//       "pos": "S",
+//       "jerseyNum": "11",
+//       "weight": "175",
+//       "height": "5'10\"",
+//       "exp": "9",
+//       "school": "University of Arizona"
+//       },
+// ];
 
 const mysteryPlayer = {
   "longName": "Noah Miller",
@@ -100,14 +122,14 @@ function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerN
     <div class="o-player">
     <h4 class="btn" onclick="selectInput(this)">${player.longName}</h4>
     <ul>
-      <li class="${playerCon}">${player.con}</li>
-      <li class="${playerTeam}">${player.team}</li>
-      <li class="${playerPos}">${player.pos}</li>
-      <li class="${playerNum}">${player.jerseyNum}</li>
-      <li class="${playerWeight}">${player.weight}</li>
-      <li class="${playerHeight}">${player.height}</li>
-      <li class="${playerExp}">${player.exp}</li>
-      <li class="${playerSchool}">${player.school.toLowerCase().split(' ').map(name => name[0]).join('')}</li>
+      <li class="o-player--con ${playerCon}">${player.con}</li>
+      <li class="o-player--team ${playerTeam}">${player.team}</li>
+      <li class="o-player--pos ${playerPos}">${player.pos}</li>
+      <li class="o-player--num ${playerNum}">${player.jerseyNum}</li>
+      <li class="o-player--weight ${playerWeight}">${player.weight}</li>
+      <li class="o-player--height ${playerHeight}">${player.height}</li>
+      <li class="o-player--exp ${playerExp}">${player.exp}</li>
+      <li class="o-player--school ${playerSchool}">${player.school.toLowerCase().split(' ').map(name => name[0]).join('')}</li>
     </ul>
   </div>`;
 
@@ -116,6 +138,26 @@ function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerN
 
 function displaySearchResults(result) {
   const content = result.map(player => {
+
+    if (player.team === 'BUF' || player.team === 'MIA' || player.team === 'NE' || player.team === 'NYJ') {
+      player.con = 'AFC E.'
+    } if (player.team === 'BAL' || player.team === 'CIN' || player.team === 'CLR' || player.team === 'PIT') {
+      player.con = 'AFC N.'
+    } if (player.team === 'HOU' || player.team === 'IND' || player.team === 'JAX' || player.team === 'TEN') {
+      player.con = 'AFC S.'
+    } if (player.team === 'DEN' || player.team === 'KC' || player.team === 'LV' || player.team === 'LAC') {
+      player.con = 'AFC W.'
+    } if (player.team === 'DAL' || player.team === 'NYG' || player.team === 'PHI' || player.team === 'WSH') {
+      player.con = 'NFC E.'
+    } if (player.team === 'CHI' || player.team === 'DET' || player.team === 'GB' || player.team === 'MIN') {
+      player.con = 'NFC N.'
+    } if (player.team === 'ATL' || player.team === 'CAR' || player.team === 'NO' || player.team === 'TB') {
+      player.con = 'NFC S.'
+    } if (player.team === 'ARI' || player.team === 'LAR' || player.team === 'SF' || player.team === 'SEA') {
+      player.con = 'NFC W.'
+    } else { return };
+
+    // these will all be changed from the mysteryPlayer to the last player guessed and only displaying the greens.
     const playerCon = player.con === mysteryPlayer.con ? 'match' : 'no-match';
     const playerTeam = player.Team === mysteryPlayer.con ? 'match' : 'no-match';
     const playerPos = player.pos === mysteryPlayer.pos ? 'match' : 'no-match';
@@ -141,14 +183,12 @@ function clearResults() {
 
 inputSearch.addEventListener('focus', function(){
   if (document.activeElement === inputSearch) {
-    console.log('Input is focused');
     searchResults.classList.add('a-search-key--slide');
   }
 });
 
 inputSearch.addEventListener('blur', function(){
   if (document.activeElement !== inputSearch && inputSearch.value == 0) {
-    console.log('Input is not focused');
     searchResults.classList.remove('a-search-key--slide');
   }
 });

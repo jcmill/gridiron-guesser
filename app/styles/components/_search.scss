@@ -47,7 +47,7 @@
       width: 100%;
 
       @include query($md) {
-        translate: 0;
+        translate: 0 calc($input-size * -1);
       }
 
       &--key {
@@ -55,6 +55,10 @@
         position: relative;
         z-index: -1;
         @include font(14px, 300);
+
+        @include query($md){
+          padding: calc($input-size / 4.5) 0;
+        }
 
         @include query($lg){
           @include font($fs-body, 300);
@@ -74,20 +78,17 @@
       }
 
       ul {
+        align-items: center;
         display: flex;
-        margin: .5em 0 0 0;
+        justify-content: space-around;
+        margin: .5em .5em 0 .5em;
         padding: 0 .5em;
 
         li {
-          border-right: 1px solid color(a);
           flex: 0 1 auto;
           text-align: center;
           text-transform: uppercase;
           width: 100%;
-
-          &:last-of-type {
-            border: none;
-          }
         }
       }
       
