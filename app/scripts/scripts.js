@@ -99,7 +99,7 @@ const mysteryPlayer = {
   "weight": "120",
   "height": "6'4\"",
   "exp": "2",
-  "school": "Notre Dame"
+  "age": "41"
 };
 
 inputSearch.onkeyup = function(){
@@ -117,7 +117,7 @@ inputSearch.onkeyup = function(){
   displaySearchResults(nameResult);
 };
 
-function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerSchool) {
+function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge) {
   let html = `
     <div class="o-player">
     <h4 class="btn" onclick="selectInput(this)">${player.longName}</h4>
@@ -126,10 +126,10 @@ function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerN
       <li class="o-player--team ${playerTeam}">${player.team}</li>
       <li class="o-player--pos ${playerPos}">${player.pos}</li>
       <li class="o-player--num ${playerNum}">${player.jerseyNum}</li>
-      <li class="o-player--weight ${playerWeight}">${player.weight}</li>
-      <li class="o-player--height ${playerHeight}">${player.height}</li>
+      <li class="o-player--age ${playerAge}">${player.age}</li>
       <li class="o-player--exp ${playerExp}">${player.exp}</li>
-      <li class="o-player--school ${playerSchool}">${player.school.toLowerCase().split(' ').map(name => name[0]).join('')}</li>
+      <li class="o-player--height ${playerHeight}">${player.height}</li>
+      <li class="o-player--weight ${playerWeight}">${player.weight} lbs</li>
     </ul>
   </div>`;
 
@@ -165,9 +165,9 @@ function displaySearchResults(result) {
     const playerWeight = player.weight === mysteryPlayer.weight ? 'match' : 'no-match';
     const playerHeight = player.height === mysteryPlayer.height ? 'match' : 'no-match';
     const playerExp = player.exp === mysteryPlayer.exp ? 'match' : 'no-match';
-    const playerSchool = player.school === mysteryPlayer.school ? 'match' : 'no-match';
+    const playerAge = player.age === mysteryPlayer.age ? 'match' : 'no-match';
 
-    return SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerSchool);
+    return SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge);
   });
   searchResultsOptions.innerHTML = content.join('');
 };
