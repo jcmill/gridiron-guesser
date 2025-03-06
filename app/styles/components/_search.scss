@@ -24,7 +24,7 @@
       line-height: .75;
     }
 
-    .c-timer, .c-field {
+    .o-timer, .o-field {
       grid-row: 1;
 
       @include query($md) {
@@ -33,7 +33,7 @@
       }
     }
 
-    .c-downs, .c-yards {
+    .o-downs, .o-yards {
       grid-row: 3;
 
       @include query($md) {
@@ -41,21 +41,21 @@
       }
     }
 
-    .c-timer {
+    .o-timer {
       place-self: end start;
     }
 
-    .c-field {
+    .o-field {
       place-self: end;
     }
 
-    .c-downs {
+    .o-downs {
       @include query($md) {
         grid-column: 1;
       }
     }
     
-    .c-downs{
+    .o-downs{
       place-self: start start;
 
       @include query($md) {
@@ -63,7 +63,7 @@
       }
     }
 
-    .c-yards {
+    .o-yards {
       place-self: start end;
 
       @include query($md) {
@@ -72,7 +72,7 @@
       }
     }
 
-    .c-search {
+    .o-search {
       grid-column: 1 / span 2;
       grid-row: 2;
       isolation: isolate;
