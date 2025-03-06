@@ -84,8 +84,8 @@ inputSearch.onkeyup = function(){
 
 function SearchDisplayTemplate(player, playerIndex, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge) {
   let html = `
-    <div class="o-player" onclick="selectInput(${playerIndex})" data="${playerIndex}">
-    <h4 class="btn">${player.longName}</h4>
+    <div class="o-player btn" onclick="selectInput(${playerIndex})" data="${playerIndex}">
+    <h4>${player.longName}</h4>
     <ul>
       <li class="o-player--con ${playerCon}">${player.con}</li>
       <li class="o-player--team ${playerTeam}">${player.team}</li>
