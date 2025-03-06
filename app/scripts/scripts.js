@@ -45,51 +45,6 @@ function menuDisplay(action){
 
 let players = [];
 
-fetch('public/scripts/players.json')
-  .then(response => response.json())
-  .then(data => {
-    playersData = data;
-    players = playersData.body
-  })
-  .catch(error => console.error('Error fetching player data:', error));
-
-
-// let players = [
-//   {
-//     "longName": "Jake Miller",
-//     "con": "AE",
-//     "team": "ARI",
-//     "pos": "LS",
-//     "jerseyNum": "59",
-//     "weight": "234",
-//     "height": "6'4\"",
-//     "exp": "2",
-//     "school": "Notre Dame"
-//   },
-//   {
-//     "longName": "Johanna Miller",
-//     "con": "NW",
-//     "team": "KC",
-//     "pos": "RB",
-//     "jerseyNum": "11",
-//     "weight": "120",
-//     "height": "5'6\"",
-//     "exp": "3",
-//     "school": "Fresno State"
-//     },
-//     {
-//       "longName": "Trevor Vernon-Yates",
-//       "con": "NE",
-//       "team": "DE",
-//       "pos": "S",
-//       "jerseyNum": "11",
-//       "weight": "175",
-//       "height": "5'10\"",
-//       "exp": "9",
-//       "school": "University of Arizona"
-//       },
-// ];
-
 const mysteryPlayer = {
   "longName": "Noah Miller",
   "con": "AFCW",
@@ -101,6 +56,16 @@ const mysteryPlayer = {
   "exp": "2",
   "age": "41"
 };
+
+let currentGuess = [];
+
+fetch('public/scripts/players.json')
+  .then(response => response.json())
+  .then(data => {
+    playersData = data;
+    players = playersData.body
+  })
+  .catch(error => console.error('Error fetching player data:', error));
 
 inputSearch.onkeyup = function(){
   let nameResult = [];
@@ -117,10 +82,10 @@ inputSearch.onkeyup = function(){
   displaySearchResults(nameResult);
 };
 
-function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge) {
+function SearchDisplayTemplate(player, playerIndex, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge) {
   let html = `
-    <div class="o-player">
-    <h4 class="btn" onclick="selectInput(this)">${player.longName}</h4>
+    <div class="o-player" onclick="selectInput(${playerIndex})" data="${playerIndex}">
+    <h4 class="btn">${player.longName}</h4>
     <ul>
       <li class="o-player--con ${playerCon}">${player.con}</li>
       <li class="o-player--team ${playerTeam}">${player.team}</li>
@@ -149,7 +114,6 @@ function displaySearchResults(result) {
       ATL: 'NFC S.', CAR: 'NFC S.', NO: 'NFC S.', TB: 'NFC S.',
       ARI: 'NFC W.', LAR: 'NFC W.', SF: 'NFC W.', SEA: 'NFC W.'
     };
-
     player.con = teamToConference[player.team] || null;
 
     // these will all be changed from the mysteryPlayer to the last player guessed and only displaying the greens.
@@ -162,14 +126,18 @@ function displaySearchResults(result) {
     const playerExp = player.exp === mysteryPlayer.exp ? 'match' : 'no-match';
     const playerAge = player.age === mysteryPlayer.age ? 'match' : 'no-match';
 
-    return SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge);
+    let playerIndex = players.indexOf(player)
+
+    return SearchDisplayTemplate(player, playerIndex, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge);
   });
   searchResultsOptions.innerHTML = content.join('');
 };
 
-function selectInput(playerInfo) {
-  inputSearch.value = playerInfo.innerHTML;
-  clearResults()
+function selectInput(selectedPlayer) {
+  currentGuess = players[selectedPlayer];
+  inputSearch.value = '';
+  clearResults();
+  console.log(currentGuess);
 }
 
 function clearResults() {
