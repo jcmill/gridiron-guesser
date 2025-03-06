@@ -139,23 +139,18 @@ function SearchDisplayTemplate(player, playerCon, playerTeam, playerPos, playerN
 function displaySearchResults(result) {
   const content = result.map(player => {
 
-    if (player.team === 'BUF' || player.team === 'MIA' || player.team === 'NE' || player.team === 'NYJ') {
-      player.con = 'AFC E.'
-    } if (player.team === 'BAL' || player.team === 'CIN' || player.team === 'CLR' || player.team === 'PIT') {
-      player.con = 'AFC N.'
-    } if (player.team === 'HOU' || player.team === 'IND' || player.team === 'JAX' || player.team === 'TEN') {
-      player.con = 'AFC S.'
-    } if (player.team === 'DEN' || player.team === 'KC' || player.team === 'LV' || player.team === 'LAC') {
-      player.con = 'AFC W.'
-    } if (player.team === 'DAL' || player.team === 'NYG' || player.team === 'PHI' || player.team === 'WSH') {
-      player.con = 'NFC E.'
-    } if (player.team === 'CHI' || player.team === 'DET' || player.team === 'GB' || player.team === 'MIN') {
-      player.con = 'NFC N.'
-    } if (player.team === 'ATL' || player.team === 'CAR' || player.team === 'NO' || player.team === 'TB') {
-      player.con = 'NFC S.'
-    } if (player.team === 'ARI' || player.team === 'LAR' || player.team === 'SF' || player.team === 'SEA') {
-      player.con = 'NFC W.'
-    } else { return };
+    const teamToConference = {
+      BUF: 'AFC E.', MIA: 'AFC E.', NE: 'AFC E.', NYJ: 'AFC E.',
+      BAL: 'AFC N.', CIN: 'AFC N.', CLR: 'AFC N.', PIT: 'AFC N.',
+      HOU: 'AFC S.', IND: 'AFC S.', JAX: 'AFC S.', TEN: 'AFC S.',
+      DEN: 'AFC W.', KC: 'AFC W.', LV: 'AFC W.', LAC: 'AFC W.',
+      DAL: 'NFC E.', NYG: 'NFC E.', PHI: 'NFC E.', WSH: 'NFC E.',
+      CHI: 'NFC N.', DET: 'NFC N.', GB: 'NFC N.', MIN: 'NFC N.',
+      ATL: 'NFC S.', CAR: 'NFC S.', NO: 'NFC S.', TB: 'NFC S.',
+      ARI: 'NFC W.', LAR: 'NFC W.', SF: 'NFC W.', SEA: 'NFC W.'
+    };
+
+    player.con = teamToConference[player.team] || null;
 
     // these will all be changed from the mysteryPlayer to the last player guessed and only displaying the greens.
     const playerCon = player.con === mysteryPlayer.con ? 'match' : 'no-match';
