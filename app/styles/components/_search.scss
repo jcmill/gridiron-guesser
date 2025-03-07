@@ -25,10 +25,11 @@
     h5 {
       align-items: center;
       color: color(c);
-      display: flex;
+      display: inline-flex;
       line-height: .75;
       
       span {
+        display: inline-block;
         margin: 0 .2em 0 .2em;
       }
 
@@ -43,6 +44,16 @@
       @include query($md) {
         grid-column: 2;
         grid-row: 1;
+      }
+
+      &--wrapper {
+        align-items:center;
+        display: flex;
+        margin: 0;
+
+        .icon {
+          margin: 0;
+        }
       }
     }
 

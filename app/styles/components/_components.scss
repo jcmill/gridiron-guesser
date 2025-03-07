@@ -6,30 +6,46 @@
   cursor: pointer;
 }
 
-.btn-icon {
+.icon {
   aspect-ratio: 1;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
   position: relative;
-  width: $input-size;
+  width: $icon-size;
 
   &::before {
     aspect-ratio: 1;
     content: '';
     display: block;
     mask: no-repeat center / contain;
-    position: absolute;
+    // position: absolute;
     top: 0;
-    width: $input-size;
+    width: $icon-size;
   }
 
-  &--search {
+  &--arrow-left-whole {
     &::before {
-      background-color: color(d);
-      mask-image: $icon-search;
-
+      background-color: color(b);
+      mask-image: $icon-arrow-left-whole;
     }
-    &:hover::before {
-      background-color: color(a);
-      transition: all .25s ease;
+  }
+  &--arrow-left-outline {
+    &::before {
+      background-color: color(c);
+      mask-image: $icon-arrow-left-outline;
+    }
+  }
+  &--arrow-right-whole {
+    &::before {
+      background-color: color(b);
+      mask-image: $icon-arrow-right-whole;
+    }
+  }
+  &--arrow-right-outline {
+    &::before {
+      background-color: color(c);
+      mask-image: $icon-arrow-right-outline;
     }
   }
 }

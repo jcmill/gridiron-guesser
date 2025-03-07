@@ -2,12 +2,15 @@ section.o-ui
   .o-ui__container
     .o-timer 
       h5 
-        span.t-secondary Time 
+        span.t-secondary Time
         span.js-time :40
     .o-field 
       h5 
         span.t-secondary On 
-        span.js-time 40
+        span.o-field--wrapper.js-field
+          span.icon.icon--arrow-left-whole 
+          | 40
+          span.icon.icon--arrow-right-outline  
     .o-downs 
       h5 
         span.js-downs 3  
