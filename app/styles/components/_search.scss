@@ -23,7 +23,18 @@
     }
 
     h5 {
+      align-items: center;
+      color: color(c);
+      display: flex;
       line-height: .75;
+      
+      span {
+        margin: 0 .2em 0 .2em;
+      }
+
+      .t-secondary {
+        color: color(a);
+      }
     }
 
     .o-timer, .o-field {
