@@ -3,6 +3,8 @@
 @use '../base/scss-color-curve' as *;
 
 .o-ui {
+  position: relative;
+  z-index: 10;
   &__container {
     border-bottom: 1px solid color(a);
     display: grid;

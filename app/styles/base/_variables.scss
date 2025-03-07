@@ -1,5 +1,4 @@
 @use 'sass:map';
-// @use 'scss-color-curve' as *;
 // colors
 $white: #ffffff;
 $black: #000000;
@@ -43,7 +42,7 @@ $color-settings: (
 $fs-base: 16px;
 $fs-h1: 6em; // clamp()
 $fs-h2: 5em; // clamp()
-$fs-h3: 4em; // clamp()
+$fs-h3: clamp(2em, 3.75vw, 3.25em ); // clamp(2em, 3.75vw, 3.25em )
 $fs-h4: clamp(2em, 2vw, 3em);
 $fs-h5: clamp(1.5em, 2vw, 1.75em); // clamp()
 $fs-h6: clamp(1.25em, 2vw, 1.5em); // clamp()

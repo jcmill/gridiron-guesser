@@ -1,4 +1,5 @@
 @use '../base/variables' as *;
+@use '../base/mixins' as *;
 @use '../base/scss-color-curve' as *;
 
 .btn {
@@ -29,6 +30,109 @@
     &:hover::before {
       background-color: color(a);
       transition: all .25s ease;
+    }
+  }
+}
+
+.c-players {
+  overflow: hidden;
+}
+
+.c-player {
+  display: grid;
+  grid-template: auto auto / 1fr;
+  // overflow: hidden;
+  padding: 2em 0;
+  position: relative;
+
+  @include query($md) {
+    grid-template: 1fr / 4fr 5fr;
+  }
+
+  &__general, &__details {
+    display: grid;
+    position: relative;
+  }
+
+  &__details {
+    display: grid;
+    grid-template: 1fr 1fr / repeat(4, auto);
+  }
+
+  &__name {
+    padding: 0 .5em 0 0;
+    place-self: center start;
+    word-break: break-word;
+  }
+
+  &__detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: .5em 0 .5em .5em;
+
+    p {
+      color: color(c);
+      margin: 0 0 .5em 0;
+      @include font(.8em);
+
+      @include font($fs-body);
+    }
+
+    &--border-upper {
+      border-left: 1px solid color(a, -6);
+      border-bottom: 1px solid color(a, -6);
+
+      @include query($md) {
+        border-left: 1px solid color(a, -6);
+        border-bottom: 1px solid color(a, -6);
+      }
+    }
+  
+    &--border-lower {
+      border-left: 1px solid color(a, -6);
+      border-top: 1px solid color(a, -6);
+      margin: -1px 0 0 0;
+
+      @include query($md) {
+        border-left: 1px solid color(a, -6);
+        border-top: 1px solid color(a, -6);
+      }
+    }
+  }
+
+  &--logo {
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 2;
+    inset: 50% auto auto -20%;
+    opacity: .07;
+    position: absolute;
+    translate: 0 -50%;
+    z-index: -1;
+
+    img {
+      place-self: end;
+      width: 80%;
+    }
+
+    @include query($md) {
+      inset: 50% 0 auto auto;
+    }
+  }
+
+  &--number {
+    inset: 75% 0 auto auto;
+    place-self: center end;
+    position: absolute;
+    translate: 0 -43%;
+    opacity: .1;
+
+    @include query($md) {
+      inset: 50% 0 auto auto;
+    }
+
+    span {
+      @include font(clamp(12em, 22vw, 16em), 950, 1, 10)
     }
   }
 }

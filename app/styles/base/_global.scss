@@ -16,7 +16,7 @@ body {
       transparent 100%
     ),
     radial-gradient(
-      farthest-side at -20% 95%,
+      farthest-side at -50% 95%,
       color(a),
       transparent 40%
     ),
@@ -40,7 +40,7 @@ body {
       color(d, 2) 20%,
       color(a)
     );
-  // background: url('../images/grain-bg.jpg');
+  background: linear-gradient(to top left, color(d), color(d, -4));
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
@@ -50,20 +50,20 @@ body {
   width: 100dvw;
   @include font($fs-base);
 
-  &::before {
-    background: linear-gradient(
-      to bottom right,
-      color(e),
-      rgba(0, 0, 0, 0) 90%),
-      url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10500' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    background-blend-mode: hard-light;
-    background-size: cover;
-    opacity: .5;
-    content: '';
-    inset: 0 0 0 0;
-    position: fixed;
-    z-index: -1;
-  }
+  // &::before {
+  //   background: linear-gradient(
+  //     to bottom right,
+  //     color(e),
+  //     rgba(0, 0, 0, 0) 90%),
+  //     url("data:image/svg+xml,%3C!-- svg: first layer --%3E%3Csvg viewBox='0 0 90 90' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10500' numOctaves='10' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  //   background-blend-mode: hard-light;
+  //   background-size: cover;
+  //   opacity: .5;
+  //   content: '';
+  //   inset: 0 0 0 0;
+  //   position: fixed;
+  //   z-index: -1;
+  // }
 
   .hide {
     display: none;
@@ -80,8 +80,12 @@ body {
   }
 
   h3 {
-    @include font($fs-h3, $fw-bolder);
+    @include font(8vw, $fw-bolder);
     text-transform: uppercase;
+
+    @include query($md) {
+      @include font($fs-h3, $fw-bolder);
+    }
   }
 
   h4 {
@@ -103,8 +107,16 @@ body {
   }
 
   h6 {
-    @include font($fs-h6, $fw-bolder, 1, 50);
+    @include font(3.5vw, $fw-bolder, 1, 50);
     text-transform: uppercase;
+
+    @include query($md) {
+      @include font($fs-h6, $fw-bolder, 1, 50);
+    }
+  }
+
+  b {
+    @include font(1.1em, $fw-bolder, 1, 50);
   }
   
 
@@ -112,6 +124,10 @@ body {
     padding: 0 4dvw;
 
     @include query($lg) {
+      padding: 0 5dvw;
+    }
+
+    @include query($xl) {
       padding: 0 10dvw;
     }
   }
