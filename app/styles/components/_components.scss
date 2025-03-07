@@ -72,7 +72,7 @@
     padding: .5em 0 .5em .5em;
 
     p {
-      color: color(c);
+      color: color(a, -5);
       margin: 0 0 .5em 0;
       @include font(.8em);
 
@@ -80,23 +80,23 @@
     }
 
     &--border-upper {
-      border-left: 1px solid color(a, -6);
-      border-bottom: 1px solid color(a, -6);
+      border-left: 1px dotted color(a, -6);
+      border-bottom: 1px dotted color(a, -6);
 
       @include query($md) {
-        border-left: 1px solid color(a, -6);
-        border-bottom: 1px solid color(a, -6);
+        border-left: 1px dotted color(a, -6);
+        border-bottom: 1px dotted color(a, -6);
       }
     }
   
     &--border-lower {
-      border-left: 1px solid color(a, -6);
-      border-top: 1px solid color(a, -6);
+      border-left: 1px dotted color(a, -6);
+      border-top: 1px dotted color(a, -6);
       margin: -1px 0 0 0;
 
       @include query($md) {
-        border-left: 1px solid color(a, -6);
-        border-top: 1px solid color(a, -6);
+        border-left: 1px dotted color(a, -6);
+        border-top: 1px dotted color(a, -6);
       }
     }
   }

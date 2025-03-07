@@ -40,7 +40,7 @@ body {
       color(d, 2) 20%,
       color(a)
     );
-  background: linear-gradient(to top left, color(d), color(d, -4));
+  background: linear-gradient(to top left, color(d, -4), color(d, -6));
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
@@ -137,7 +137,7 @@ body {
   }
 
   .close {
-    color: color(c);
+    color: color(c, -4);
   }
 }
 
