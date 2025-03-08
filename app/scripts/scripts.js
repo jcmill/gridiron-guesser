@@ -43,27 +43,29 @@ function menuDisplay(action){
   }
 };
 
-let players = [];
-
-const mysteryPlayer = {
-  "longName": "Noah Miller",
-  "con": "AFCW",
-  "team": "NC",
-  "pos": "LS",
-  "jerseyNum": "11",
-  "weight": "120",
-  "height": "6'4\"",
-  "exp": "2",
-  "age": "41"
+function randomPlayer(x, y) {
+  const num = Math.floor(Math.random() * (y - x) + x);
+  mysteryPlayer = cleanPlayers[num];
 };
 
+
+let players = [];
+let cleanPlayers = [];
+let mysteryPlayer = [];
 let currentGuess = [];
 
 fetch('public/scripts/players.json')
   .then(response => response.json())
   .then(data => {
-    playersData = data;
-    players = playersData.body
+    players = data.body;
+    cleanPlayers = players.filter(player => player.isFreeAgent === "False")
+    .filter(player => player.jerseyNum !== "")
+    .filter(player => player.pos !== "")
+    .filter(player => player.weight !== "")
+    .filter(player => player.height !== "")
+    .filter(player => player.age !== "")
+    .filter(player => player.exp !== "");
+    randomPlayer(1, cleanPlayers.length);
   })
   .catch(error => console.error('Error fetching player data:', error));
 
@@ -71,7 +73,7 @@ inputSearch.onkeyup = function(){
   let nameResult = [];
   let input = inputSearch.value;
   if(input.length){
-    players.forEach((player) => {
+    cleanPlayers.forEach((player) => {
       if (player.longName.toLowerCase().includes(input.toLowerCase())) {
         nameResult.push(player);
       }
@@ -103,6 +105,7 @@ function SearchDisplayTemplate(player, playerIndex, playerCon, playerTeam, playe
 
 function displaySearchResults(result) {
   const content = result.map(player => {
+    let playerIndex = players.indexOf(player)
 
     const teamToConference = {
       BUF: 'AFC E.', MIA: 'AFC E.', NE: 'AFC E.', NYJ: 'AFC E.',
@@ -118,15 +121,13 @@ function displaySearchResults(result) {
 
     // these will all be changed from the mysteryPlayer to the last player guessed and only displaying the greens.
     const playerCon = player.con === mysteryPlayer.con ? 'match' : 'no-match';
-    const playerTeam = player.Team === mysteryPlayer.con ? 'match' : 'no-match';
+    const playerTeam = player.team === mysteryPlayer.team ? 'match' : 'no-match';
     const playerPos = player.pos === mysteryPlayer.pos ? 'match' : 'no-match';
     const playerNum = player.jerseyNum === mysteryPlayer.jerseyNum ? 'match' : 'no-match';
     const playerWeight = player.weight === mysteryPlayer.weight ? 'match' : 'no-match';
     const playerHeight = player.height === mysteryPlayer.height ? 'match' : 'no-match';
     const playerExp = player.exp === mysteryPlayer.exp ? 'match' : 'no-match';
     const playerAge = player.age === mysteryPlayer.age ? 'match' : 'no-match';
-
-    let playerIndex = players.indexOf(player)
 
     return SearchDisplayTemplate(player, playerIndex, playerCon, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge);
   });
@@ -137,7 +138,6 @@ function selectInput(selectedPlayer) {
   currentGuess = players[selectedPlayer];
   inputSearch.value = '';
   clearResults();
-  console.log(currentGuess);
 }
 
 function clearResults() {
