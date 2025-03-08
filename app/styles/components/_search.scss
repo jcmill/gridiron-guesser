@@ -4,7 +4,8 @@
 
 .o-ui {
   position: relative;
-  z-index: 10;
+  z-index: 2;
+  
   &__container {
     border-bottom: 1px dotted color(a, -6);
     display: grid;
