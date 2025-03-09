@@ -10,6 +10,7 @@ header {
   // overflow: clip;
   position: sticky;
   top: 0;
+  margin-top: calc($hamburger * -1);
   z-index: 10;
 
   img {
