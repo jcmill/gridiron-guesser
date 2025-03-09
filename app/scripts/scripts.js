@@ -1,8 +1,7 @@
 const bodyContainer = document.querySelector('body');
 const nav = document.querySelector('nav');
 const btnHamburger = document.querySelector('.js-hamburger');
-const menu = document.querySelector('.js-menu__content');
-const menuBlur = document.querySelector('.js-menu--blur');
+const menu = document.querySelector('.js-menu');
 
 const inputSearch = document.querySelector('.input-search');
 const searchResults = document.querySelector('.js-search-results');
@@ -25,18 +24,15 @@ document.addEventListener('click', function(el){
 function menuDisplay(action){
   if (action === 'add'){   
     menu.classList.remove('hide');
-    menuBlur.classList.remove('hide');
     setTimeout(() => {
       bodyContainer.classList.add('fixed');
       btnHamburger.classList.add('nav-active');
-      menu.classList.add('c-menu__content--open');
-      menuBlur.classList.add('c-menu--blur');
+      menu.classList.add('c-menu--open');
     }, 0);
   } else if (action === 'remove') {
     bodyContainer.classList.remove('fixed');
     btnHamburger.classList.remove('nav-active');
-    menu.classList.remove('c-menu__content--open');
-    menuBlur.classList.remove('c-menu--blur');
+    menu.classList.remove('c-menu--open');
     setTimeout(() => {
       menu.classList.add('hide');
       menuBlur.classList.add('hide');
@@ -123,7 +119,6 @@ function searchDisplayTemplate(player, playerIndex, playerConDiv, playerTeam, pl
 function getSearchPlayerAttributes(player) {
   playerConDiv = (player.con === currentGuess.con && currentGuess.con === mysteryPlayer.con &&
     player.div === currentGuess.div && currentGuess.div === mysteryPlayer.div) ? 'match' : 'no-match';
-  
   playerTeam = (player.team === currentGuess.team && currentGuess.team === mysteryPlayer.team) ? 'match' : 'no-match';
   playerPos = (player.pos === currentGuess.pos && currentGuess.pos === mysteryPlayer.pos) ? 'match' : 'no-match';
   playerNum = (player.jerseyNum === currentGuess.jerseyNum && currentGuess.jerseyNum === mysteryPlayer.jerseyNum) ? 'match' : 'no-match';
@@ -137,6 +132,8 @@ function displaySearchResults(result) {
   const content = result.map(player => {
     let playerIndex = players.indexOf(player);
     getSearchPlayerAttributes(player);
+
+    console.log(player.exp);
 
     return searchDisplayTemplate(player, playerIndex, playerConDiv, playerTeam, playerPos, playerNum, playerWeight, playerHeight, playerExp, playerAge);
   });
