@@ -136,11 +136,12 @@
     opacity: .1;
     position: absolute;
     translate: 0 -50%;
+    width: 85%;
     z-index: -1;
 
     img {
       place-self: end;
-      width: 80%;
+      width: 20em;
     }
 
     @include query($md) {

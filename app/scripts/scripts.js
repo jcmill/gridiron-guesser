@@ -151,7 +151,7 @@ function guessDisplayTemplate(player, playerConDiv, playerTeam, playerPos, playe
             <div class="c-player--number"><span>${player.jerseyNum}</span></div>
           </div>
           <div class="c-player__details">
-            <div class="c-player--logo"> <img src="./public/images/logos/az.png" alt=""></div>
+            <div class="c-player--logo"> <img src="./public/images/logos/nfl-logos/gridiron-guesser-${player.team.toLowerCase()}.png" alt=""></div>
             <div class="c-player__con c-player__detail c-player__detail--border-upper"> 
               <p class="c-player__detail--title">Con/Div</p>
               <h6 class="c-player__con--detail ${playerConDiv}">${player.con} ${player.div}</h6>
