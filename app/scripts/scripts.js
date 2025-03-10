@@ -81,7 +81,7 @@ fetch('public/scripts/players.json')
   })
   .catch(error => console.error('Error fetching player data:', error));
 
-// display total of 10 players, check against new variables that indicate correct statistical answers
+// display total of 10 players, check against new array that indicate correct statistical answers (additinal include()s for each state)
 inputSearch.onkeyup = function(){
   let nameResult = [];
   let input = inputSearch.value;
